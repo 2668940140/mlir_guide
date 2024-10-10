@@ -8,7 +8,7 @@
 
 srcdir := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
-include ${srcdir}/../../programming_examples/makefile-common
+include ${srcdir}/../makefile-common
 
 build/aie.mlir: ${srcdir}/aie2.py
 	mkdir -p ${@D}
