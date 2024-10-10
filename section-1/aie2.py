@@ -18,7 +18,7 @@ def mlir_aie_design():
     def device_body():
 
         # Tile(s) declarations
-        ComputeTile1 = tile(1, 3)
+        ComputeTile1 = tile(-1, 3) # This is wrong. No neg number here. 0 is valid
         ComputeTile2 = tile(2, 3)
         ComputeTile3 = tile(2, 4)
 
@@ -27,3 +27,8 @@ def mlir_aie_design():
 with mlir_mod_ctx() as ctx:
     mlir_aie_design()  # Call design function within the mlir-aie context
     print(ctx.module)  # Print the python-to-mlir conversion to stdout
+    res = ctx.module.operation.verify()  # Verify the generated mlir
+    if res:
+        print(res)
+    else:
+        print("MLIR verification passed.")
